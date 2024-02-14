@@ -63,17 +63,16 @@ public class Msg implements IValidatable {
 	}
 
 	public String getStartupErr() {
-		return !Validator.isEmpty(startupErr) ? startupErr
-				: "An error occurred while starting the application.";
+		return !Validator.isEmpty(startupErr) ? startupErr : "An error occurred while starting the application.";
 	}
-	
+
 	public void setStartupErr(String startupErr) {
 		this.startupErr = startupErr;
 	}
 
 	public String getJreNotFoundErr() {
-		return !Validator.isEmpty(jreNotFoundErr) ? jreNotFoundErr
-				: "This application requires a Java Runtime Environment.";
+		return !Validator.isEmpty(jreNotFoundErr) ? jreNotFoundErr :
+				"This application requires a Java Runtime Environment.";
 	}
 
 	public void setJreNotFoundErr(String jreNotFoundErr) {
@@ -81,30 +80,30 @@ public class Msg implements IValidatable {
 	}
 
 	public String getJreVersionErr() {
-		return !Validator.isEmpty(jreVersionErr) ? jreVersionErr
-				: "This application requires a Java Runtime Environment";
+		return !Validator.isEmpty(jreVersionErr) ? jreVersionErr :
+				"This application requires a Java Runtime Environment";
 	}
 
 	public void setJreVersionErr(String jreVersionErr) {
 		this.jreVersionErr = jreVersionErr;
 	}
-	
+
 	public String getLauncherErr() {
-		return !Validator.isEmpty(launcherErr) ? launcherErr
-				: "The registry refers to a nonexistent Java Runtime Environment" +
+		return !Validator.isEmpty(launcherErr) ? launcherErr :
+				"The registry refers to a nonexistent Java Runtime Environment" +
 						" installation or the runtime is corrupted.";
 	}
-	
+
 	public void setLauncherErr(String launcherErr) {
 		this.launcherErr = launcherErr;
 	}
 
 	public String getInstanceAlreadyExistsMsg() {
-    	return !Validator.isEmpty(instanceAlreadyExistsMsg) ? instanceAlreadyExistsMsg
-    			: "An application instance is already running.";
-    }
+		return !Validator.isEmpty(instanceAlreadyExistsMsg) ? instanceAlreadyExistsMsg :
+				"An application instance is already running.";
+	}
 
 	public void setInstanceAlreadyExistsMsg(String instanceAlreadyExistsMsg) {
-    	this.instanceAlreadyExistsMsg = instanceAlreadyExistsMsg;
-    }
+		this.instanceAlreadyExistsMsg = instanceAlreadyExistsMsg;
+	}
 }

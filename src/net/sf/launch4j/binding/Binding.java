@@ -47,7 +47,7 @@ public interface Binding {
 
 	/** Java Bean property bound to a component */
 	public String getProperty();
-	/** Clear component, set it to the default value */ 
+	/** Clear component, set it to the default value */
 	public void clear(IValidatable bean);
 	/** Java Bean property -> Component */
 	public void put(IValidatable bean);

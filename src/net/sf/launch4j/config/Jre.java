@@ -150,7 +150,7 @@ public class Jre implements IValidatable {
 	}
 
 	public void setRequires64Bit(boolean requires64Bit) {
-		this.requires64Bit= requires64Bit;
+		this.requires64Bit = requires64Bit;
 	}
 
 	/** Initial heap size in MB */
@@ -170,22 +170,22 @@ public class Jre implements IValidatable {
 	public void setMaxHeapSize(Integer maxHeapSize) {
 		this.maxHeapSize = getInteger(maxHeapSize);
 	}
-	
+
 	public Integer getInitialHeapPercent() {
-    	return initialHeapPercent;
-    }
+		return initialHeapPercent;
+	}
 
 	public void setInitialHeapPercent(Integer initialHeapPercent) {
-    	this.initialHeapPercent = getInteger(initialHeapPercent);
-    }
+		this.initialHeapPercent = getInteger(initialHeapPercent);
+	}
 
 	public Integer getMaxHeapPercent() {
-    	return maxHeapPercent;
-    }
+		return maxHeapPercent;
+	}
 
 	public void setMaxHeapPercent(Integer maxHeapPercent) {
-    	this.maxHeapPercent = getInteger(maxHeapPercent);
-    }
+		this.maxHeapPercent = getInteger(maxHeapPercent);
+	}
 
 	/** Convert 0 to null */
 	private Integer getInteger(Integer i) {

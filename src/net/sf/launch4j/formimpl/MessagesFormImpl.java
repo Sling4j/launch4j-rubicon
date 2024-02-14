@@ -48,7 +48,7 @@ public class MessagesFormImpl extends MessagesForm {
 	public MessagesFormImpl(Bindings bindings) {
 		Msg m = new Msg();
 		bindings.addOptComponent("messages", Msg.class, _messagesCheck)
-				.add("messages.startupErr", _startupErrTextArea, 	m.getStartupErr())
+				.add("messages.startupErr", _startupErrTextArea, m.getStartupErr())
 				.add("messages.jreNotFoundErr", _jreNotFoundErrTextArea, m.getJreNotFoundErr())
 				.add("messages.jreVersionErr", _jreVersionErrTextArea, m.getJreVersionErr())
 				.add("messages.launcherErr", _launcherErrTextArea, m.getLauncherErr())

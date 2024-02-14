@@ -47,7 +47,7 @@ public class SingleInstanceFormImpl extends SingleInstanceForm {
 
 	public SingleInstanceFormImpl(Bindings bindings) {
 		bindings.addOptComponent("singleInstance", SingleInstance.class,
-								_singleInstanceCheck)
+				_singleInstanceCheck)
 				.add("singleInstance.mutexName", _mutexNameField)
 				.add("singleInstance.windowTitle", _windowTitleField);
 	}

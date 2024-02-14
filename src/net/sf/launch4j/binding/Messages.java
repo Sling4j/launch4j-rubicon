@@ -54,17 +54,17 @@ public class Messages {
 			return '!' + key + '!';
 		}
 	}
-	
+
 	public static String getString(String key, String arg0) {
-		return getString(key, new Object[] {arg0});
+		return getString(key, new Object[]{arg0});
 	}
 
 	public static String getString(String key, String arg0, String arg1) {
-		return getString(key, new Object[] {arg0, arg1});
+		return getString(key, new Object[]{arg0, arg1});
 	}
 
 	public static String getString(String key, String arg0, String arg1, String arg2) {
-		return getString(key, new Object[] {arg0, arg1, arg2});
+		return getString(key, new Object[]{arg0, arg1, arg2});
 	}
 
 	public static String getString(String key, Object[] args) {

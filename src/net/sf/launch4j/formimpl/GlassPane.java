@@ -24,8 +24,10 @@ public class GlassPane extends JComponent implements AWTEventListener {
 
 	public GlassPane(Window w) {
 		_window = w;
-		addMouseListener(new MouseAdapter() {});
-		addKeyListener(new KeyAdapter() {});
+		addMouseListener(new MouseAdapter() {
+		});
+		addKeyListener(new KeyAdapter() {
+		});
 		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 	}
 

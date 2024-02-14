@@ -55,12 +55,12 @@ public class HeaderFormImpl extends HeaderForm {
 
 	public HeaderFormImpl(Bindings bindings) {
 		_bindings = bindings;
-		_bindings.add("headerTypeIndex", new JRadioButton[] { _guiHeaderRadio,
-															_consoleHeaderRadio,
-															_jniGuiHeaderRadio,
-															_jniConsoleHeaderRadio })
+		_bindings.add("headerTypeIndex", new JRadioButton[]{_guiHeaderRadio,
+				_consoleHeaderRadio,
+				_jniGuiHeaderRadio,
+				_jniConsoleHeaderRadio})
 				.add("headerObjects", "customHeaderObjects", _headerObjectsCheck,
-															_headerObjectsTextArea)
+						_headerObjectsTextArea)
 				.add("libs", "customLibs", _libsCheck, _libsTextArea);
 
 		_guiHeaderRadio.setActionCommand(Config.GUI_HEADER);
@@ -73,11 +73,11 @@ public class HeaderFormImpl extends HeaderForm {
 		_consoleHeaderRadio.addActionListener(headerTypeActionListener);
 		_jniGuiHeaderRadio.addActionListener(headerTypeActionListener);
 		_jniConsoleHeaderRadio.addActionListener(headerTypeActionListener);
-		
+
 		_headerObjectsCheck.addActionListener(new HeaderObjectsActionListener());
 		_libsCheck.addActionListener(new LibsActionListener());
 	}
-	
+
 	private void updateLibs() {
 		if (!_libsCheck.isSelected()) {
 			ConfigPersister.getInstance().getConfig().setLibs(null);

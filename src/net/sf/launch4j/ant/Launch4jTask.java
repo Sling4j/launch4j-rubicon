@@ -55,8 +55,8 @@ public class Launch4jTask extends Task {
 	private AntConfig _config;
 
 	// System properties
-	private File tmpdir;		// launch4j.tmpdir
-	private File bindir;		// launch4j.bindir
+	private File tmpdir; // launch4j.tmpdir
+	private File bindir; // launch4j.bindir
 
 	// Override configFile settings
 	private File jar;
@@ -100,8 +100,9 @@ public class Launch4jTask extends Task {
 				}
 			} else if (_config != null) {
 				_config.unwrap();
-				ConfigPersister.getInstance().setAntConfig(_config,
-						getProject().getBaseDir());
+				ConfigPersister.getInstance()
+						.setAntConfig(_config,
+								getProject().getBaseDir());
 			} else {
 				throw new BuildException(
 						Messages.getString("Launch4jTask.specify.config"));

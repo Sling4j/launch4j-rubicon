@@ -52,7 +52,7 @@ public abstract class Log {
 	public static Log getConsoleLog() {
 		return _consoleLog;
 	}
-	
+
 	public static Log getAntLog() {
 		return _antLog;
 	}
@@ -93,13 +93,15 @@ class SwingLog extends Log {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				_textArea.setText("");
-		}});
+			}
+		});
 	}
 
 	public void append(final String line) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				_textArea.append(line + "\n");
-		}});
+			}
+		});
 	}
 }

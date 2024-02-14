@@ -76,13 +76,13 @@ public class Bindings implements PropertyChangeListener, ActionListener {
 			_modified = true;
 		}
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		_modified = true;
 	}
 
-	/** 
+	/**
 	 * Any of the components modified?
 	 */
 	public boolean isModified() {
@@ -167,6 +167,7 @@ public class Bindings implements PropertyChangeListener, ActionListener {
 	/**
 	 * Copies data from UI components to the Java Bean and checks it's class invariants.
 	 * Clears the _modified flag.
+	 * 
 	 * @throws InvariantViolationException
 	 * @throws BindingException
 	 */
@@ -183,7 +184,7 @@ public class Bindings implements PropertyChangeListener, ActionListener {
 			}
 
 			bean.checkInvariants();
-			
+
 			for (String property : _optComponents.keySet()) {
 				IValidatable component = (IValidatable) PropertyUtils.getProperty(bean,
 						property);
@@ -193,13 +194,13 @@ public class Bindings implements PropertyChangeListener, ActionListener {
 				}
 			}
 
-			_modified = false;	// XXX
+			_modified = false; // XXX
 		} catch (InvariantViolationException e) {
 			e.setBinding(getBinding(e.getProperty()));
 			throw e;
 		} catch (Exception e) {
 			throw new BindingException(e);
-		} 
+		}
 	}
 
 	private Bindings add(Binding b) {
@@ -250,7 +251,7 @@ public class Bindings implements PropertyChangeListener, ActionListener {
 	}
 
 	/**
-	 * Handles JToggleButton, JCheckBox 
+	 * Handles JToggleButton, JCheckBox
 	 */
 	public Bindings add(String property, JToggleButton c, boolean defaultValue) {
 		registerPropertyChangeListener(c);
@@ -272,7 +273,7 @@ public class Bindings implements PropertyChangeListener, ActionListener {
 		registerPropertyChangeListener(cs);
 		return add(new JRadioButtonBinding(property, cs, defaultValue));
 	}
-	
+
 	/**
 	 * Handles JRadioButton
 	 */
@@ -300,7 +301,7 @@ public class Bindings implements PropertyChangeListener, ActionListener {
 	/**
 	 * Handles Optional JTextArea lists
 	 */
-	public Bindings add(String property, String stateProperty, 
+	public Bindings add(String property, String stateProperty,
 			JToggleButton button, JTextArea textArea) {
 		registerPropertyChangeListener(button);
 		registerPropertyChangeListener(textArea);

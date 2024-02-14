@@ -63,7 +63,6 @@ public class VersionInfoFormImpl extends VersionInfoForm {
 				.add("versionInfo.companyName", _companyNameField)
 				.add("versionInfo.copyright", _copyrightField)
 				.add("versionInfo.trademarks", _trademarksField)
-				.add("versionInfo.languageIndex", _languageCombo, VersionInfo.DEFAULT_LANGUAGE_INDEX)
-		;
+				.add("versionInfo.languageIndex", _languageCombo, VersionInfo.DEFAULT_LANGUAGE_INDEX);
 	}
 }

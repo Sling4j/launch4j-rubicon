@@ -78,7 +78,7 @@ public class VersionInfo implements IValidatable {
 				Messages.getString("VersionInfo.product.name"));
 		Validator.checkOptString(companyName, 150, "versionInfo.companyName",
 				Messages.getString("VersionInfo.company.name"));
-		Validator.checkString(internalName, 50, 	"versionInfo.internalName",
+		Validator.checkString(internalName, 50, "versionInfo.internalName",
 				Messages.getString("VersionInfo.internal.name"));
 		Validator.checkOptString(trademarks, 150, "versionInfo.trademarks",
 				Messages.getString("VersionInfo.trademarks"));

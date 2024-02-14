@@ -48,7 +48,7 @@ import net.sf.launch4j.formimpl.MainFrame;
  */
 @Slf4j
 public class Main {
-	private static String _name; 
+	private static String _name;
 	private static String _description;
 
 	public static void main(String[] args) {
@@ -69,9 +69,9 @@ public class Main {
 						+ ": launch4j config.xml");
 			}
 		} catch (Exception e) {
-			log.error(e.getMessage(),e);
+			log.error(e.getMessage(), e);
 			System.exit(1);
-		} 
+		}
 	}
 
 	public static String getName() {
@@ -83,15 +83,15 @@ public class Main {
 	}
 
 	private static void setDescription(Properties props) {
-		_name = "Launch4j " + props.getProperty("version"); 
-		_description = _name + 
+		_name = "Launch4j " + props.getProperty("version");
+		_description = _name +
 				" (http://launch4j.sourceforge.net/)\n" +
 				"Cross-platform Java application wrapper" +
-						" for creating Windows native executables.\n\n" +
+				" for creating Windows native executables.\n\n" +
 				"Copyright (C) 2004, 2022 Grzegorz Kowal\n\n" +
 				"Launch4j comes with ABSOLUTELY NO WARRANTY.\n" +
 				"This is free software, licensed under the BSD License.\n" +
 				"This product includes software developed by the Apache Software Foundation" +
-						" (http://www.apache.org/).";
+				" (http://www.apache.org/).";
 	}
 }

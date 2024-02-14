@@ -63,8 +63,7 @@ import net.sf.launch4j.form.ClassPathForm;
  */
 public class ClassPathFormImpl extends ClassPathForm {
 	private final JFileChooser _fileChooser;
-	private final FileChooserFilter _filter
-			= new FileChooserFilter("Executable jar", ".jar");
+	private final FileChooserFilter _filter = new FileChooserFilter("Executable jar", ".jar");
 
 	public ClassPathFormImpl(Bindings bindings, JFileChooser fc) {
 		bindings.addOptComponent("classPath", ClassPath.class, _classpathCheck)
@@ -144,12 +143,13 @@ public class ClassPathFormImpl extends ClassPathForm {
 			_classpathField.requestFocusInWindow();
 		}
 	}
-	
+
 	private class RemoveClasspathListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (_classpathList.isSelectionEmpty()
-					|| !MainFrame.getInstance().confirm(
-							Messages.getString("confirmClassPathRemoval"))) {
+					|| !MainFrame.getInstance()
+							.confirm(
+									Messages.getString("confirmClassPathRemoval"))) {
 				return;
 			}
 			DefaultListModel<String> model = (DefaultListModel<String>) _classpathList.getModel();
@@ -158,7 +158,7 @@ public class ClassPathFormImpl extends ClassPathForm {
 			}
 		}
 	}
-	
+
 	private class MoveUpListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			int x = _classpathList.getSelectedIndex();
@@ -172,7 +172,7 @@ public class ClassPathFormImpl extends ClassPathForm {
 			_classpathList.setSelectedIndex(x - 1);
 		}
 	}
-	
+
 	private class MoveDownListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			DefaultListModel<String> model = (DefaultListModel<String>) _classpathList.getModel();
@@ -192,8 +192,7 @@ public class ClassPathFormImpl extends ClassPathForm {
 			try {
 				_fileChooser.setFileFilter(_filter);
 				_fileChooser.setSelectedFile(new File(""));
-				if (_fileChooser.showOpenDialog(MainFrame.getInstance())
-						== JFileChooser.APPROVE_OPTION) {
+				if (_fileChooser.showOpenDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION) {
 					JarFile jar = new JarFile(_fileChooser.getSelectedFile());
 					if (jar.getManifest() == null) {
 						jar.close();

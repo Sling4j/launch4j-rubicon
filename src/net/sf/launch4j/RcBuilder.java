@@ -58,9 +58,9 @@ public class RcBuilder {
 
 	// winnt.h
 	public static final int LANG_NEUTRAL = 0;
-	public static final int SUBLANG_NEUTRAL	= 0;
-	public static final int SUBLANG_DEFAULT	= 1;
-	public static final int SUBLANG_SYS_DEFAULT	= 2;
+	public static final int SUBLANG_NEUTRAL = 0;
+	public static final int SUBLANG_DEFAULT = 1;
+	public static final int SUBLANG_SYS_DEFAULT = 2;
 
 	// MANIFEST
 	public static final int MANIFEST = 1;
@@ -91,7 +91,7 @@ public class RcBuilder {
 	public static final int REQUIRES_JDK = 18;
 	public static final int ENV_VARIABLES = 19;
 	public static final int PRIORITY_CLASS = 20;
-	public static final int	DOWNLOAD_URL = 	21;
+	public static final int DOWNLOAD_URL = 21;
 	public static final int SUPPORT_URL = 22;
 	public static final int MUTEX_NAME = 23;
 	public static final int INSTANCE_WINDOW_TITLE = 24;
@@ -110,7 +110,7 @@ public class RcBuilder {
 	public static final int INSTANCE_ALREADY_EXISTS_MSG = 105;
 
 	private final StringBuffer _sb = new StringBuffer();
-	
+
 	public String getContent() {
 		return _sb.toString();
 	}
@@ -163,7 +163,7 @@ public class RcBuilder {
 		if (c.isDontWrapJar() && c.getJar() != null) {
 			addWindowsPath(JAR, c.getJar().getPath());
 		}
-		
+
 		File file = Util.createTempFile("rc");
 
 		if ("MS932".equals(System.getProperty("file.encoding"))) {
@@ -174,7 +174,7 @@ public class RcBuilder {
 
 		return file;
 	}
-	
+
 	private void writeResourceFile(File file) throws IOException {
 		FileOutputStream os = null;
 		OutputStreamWriter osw = null;
@@ -228,7 +228,7 @@ public class RcBuilder {
 		_sb.append("\nFILEFLAGSMASK 0\n" +
 				"FILEOS 0x40000\n" +
 				"FILETYPE 1\n" +
-				"{\n" + 
+				"{\n" +
 				" BLOCK \"StringFileInfo\"\n" +
 				" {\n" +
 				"  BLOCK \"");
@@ -271,7 +271,7 @@ public class RcBuilder {
 
 		addText(JVM_OPTIONS, options.toString());
 	}
-	
+
 	private void addSplash(Splash splash) {
 		if (splash == null) {
 			return;
@@ -283,7 +283,7 @@ public class RcBuilder {
 		addTrue(SPLASH_TIMEOUT_ERR, splash.isTimeoutErr());
 		addBitmap(SPLASH_BITMAP, splash.getFile());
 	}
-	
+
 	private void addMessages(Config c) {
 		Msg msg = c.getMessages();
 
@@ -335,7 +335,7 @@ public class RcBuilder {
 	}
 
 	/**
-	 * Stores path in Windows format with '\' separators. 
+	 * Stores path in Windows format with '\' separators.
 	 */
 	private void addWindowsPath(int id, String path) {
 		if (path == null || path.equals("")) {
@@ -384,11 +384,11 @@ public class RcBuilder {
 				ConfigPersister.getInstance().getConfigPath(), bitmap)));
 		_sb.append("\"\n");
 	}
-	
+
 	private String getPath(File f) {
 		return f.getPath().replaceAll("\\\\", "\\\\\\\\");
 	}
-	
+
 	private void addSpace(StringBuffer sb) {
 		int len = sb.length();
 
@@ -396,7 +396,7 @@ public class RcBuilder {
 			sb.append(' ');
 		}
 	}
-	
+
 	private void addVerBlockValue(String key, String value) {
 		_sb.append("   VALUE \"");
 		_sb.append(key);

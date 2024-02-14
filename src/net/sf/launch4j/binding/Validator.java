@@ -54,10 +54,11 @@ public class Validator {
 
 	public static final int MAX_STR = 128;
 	public static final int MAX_PATH = 260;
-	public static final int MAX_BIG_STR = 8192;	// or 16384;
+	public static final int MAX_BIG_STR = 8192; // or 16384;
 	public static final int MAX_ARGS = 32767 - 2048;
 
-	private Validator() {}
+	private Validator() {
+	}
 
 	public static boolean isEmpty(String s) {
 		return s == null || s.equals("");
@@ -121,13 +122,11 @@ public class Validator {
 			checkString(s, maxLength, property, name);
 
 			if (!s.matches(pattern)) {
-				signalViolation(property, msg != null
-						? msg 
-						: Messages.getString("Validator.invalid.data", name));
+				signalViolation(property, msg != null ? msg : Messages.getString("Validator.invalid.data", name));
 			}
-			
+
 			totalLength += s.length();
-			
+
 			if (totalLength > totalMaxLength) {
 				signalLengthViolation(property, name, totalMaxLength);
 			}
@@ -197,7 +196,7 @@ public class Validator {
 
 		if (!list.contains(s)) {
 			signalViolation(property,
-					Messages.getString("Validator.invalid.option", name, list.toString())); 
+					Messages.getString("Validator.invalid.option", name, list.toString()));
 		}
 	}
 
@@ -206,13 +205,13 @@ public class Validator {
 			signalViolation(property, msg);
 		}
 	}
-	
+
 	public static void checkFalse(boolean condition, String property, String msg) {
 		if (condition) {
 			signalViolation(property, msg);
 		}
 	}
-	
+
 	public static void checkFile(File f, String property, String fileDescription) {
 		File cfgPath = ConfigPersister.getInstance().getConfigPath();
 		if (f == null
@@ -246,7 +245,7 @@ public class Validator {
 						String.valueOf(maxLength)));
 	}
 
-	public static void signalViolation(String property, String msg)	{
+	public static void signalViolation(String property, String msg) {
 		throw new InvariantViolationException(property, msg);
 	}
 }

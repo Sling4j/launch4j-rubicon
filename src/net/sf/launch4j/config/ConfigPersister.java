@@ -69,31 +69,31 @@ public class ConfigPersister {
 
 	private ConfigPersister() {
 		_xstream = new XStream(new DomDriver());
-		
+
 		_xstream.addPermission(NoTypePermission.NONE);
 		_xstream.addPermission(NullPermission.NULL);
 		_xstream.addPermission(PrimitiveTypePermission.PRIMITIVES);
 		_xstream.allowTypeHierarchy(Collection.class);
-		_xstream.allowTypesByWildcard(new String[] { "net.sf.launch4j.config.*" });
-		
-    	_xstream.alias("launch4jConfig", Config.class);
-    	_xstream.alias("classPath", ClassPath.class);
-    	_xstream.alias("jre", Jre.class);
-    	_xstream.alias("splash", Splash.class);
-    	_xstream.alias("versionInfo", VersionInfo.class);
+		_xstream.allowTypesByWildcard(new String[]{"net.sf.launch4j.config.*"});
 
-    	_xstream.addImplicitCollection(Config.class, "headerObjects", "obj",
-    			String.class);
-    	_xstream.addImplicitCollection(Config.class, "libs", "lib", String.class);
-    	_xstream.addImplicitCollection(Config.class, "variables", "var", String.class);
-    	_xstream.addImplicitCollection(ClassPath.class, "paths", "cp", String.class);
-    	_xstream.addImplicitCollection(Jre.class, "options", "opt", String.class);
+		_xstream.alias("launch4jConfig", Config.class);
+		_xstream.alias("classPath", ClassPath.class);
+		_xstream.alias("jre", Jre.class);
+		_xstream.alias("splash", Splash.class);
+		_xstream.alias("versionInfo", VersionInfo.class);
+
+		_xstream.addImplicitCollection(Config.class, "headerObjects", "obj",
+				String.class);
+		_xstream.addImplicitCollection(Config.class, "libs", "lib", String.class);
+		_xstream.addImplicitCollection(Config.class, "variables", "var", String.class);
+		_xstream.addImplicitCollection(ClassPath.class, "paths", "cp", String.class);
+		_xstream.addImplicitCollection(Jre.class, "options", "opt", String.class);
 	}
 
 	public static ConfigPersister getInstance() {
 		return _instance;
 	}
-	
+
 	public Config getConfig() {
 		return _config;
 	}
@@ -101,7 +101,7 @@ public class ConfigPersister {
 	public File getConfigPath() {
 		return _configPath;
 	}
-	
+
 	public File getOutputPath() throws IOException {
 		if (_config.getOutfile().isAbsolute()) {
 			return _config.getOutfile().getParentFile();
@@ -109,11 +109,10 @@ public class ConfigPersister {
 		File parent = _config.getOutfile().getParentFile();
 		return (parent != null) ? new File(_configPath, parent.getPath()) : _configPath;
 	}
-	
+
 	public File getOutputFile() throws IOException {
-		return _config.getOutfile().isAbsolute()
-			? _config.getOutfile()
-			: new File(getOutputPath(), _config.getOutfile().getName());
+		return _config.getOutfile().isAbsolute() ? _config.getOutfile() :
+				new File(getOutputPath(), _config.getOutfile().getName());
 	}
 
 	public void createBlank() {
@@ -128,36 +127,35 @@ public class ConfigPersister {
 	}
 
 	public void load(File f) throws ConfigPersisterException {
-	    try {
+		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document doc = builder.parse(f);
 
 			DOMImplementationLS domImplementation = (DOMImplementationLS) doc.getImplementation();
-		    LSSerializer lsSerializer = domImplementation.createLSSerializer();
-		    String configString = lsSerializer.writeToString(doc);
+			LSSerializer lsSerializer = domImplementation.createLSSerializer();
+			String configString = lsSerializer.writeToString(doc);
 
-	    	_config = convertToCurrent(configString);
-	    	setConfigPath(f);
+			_config = convertToCurrent(configString);
+			setConfigPath(f);
 		} catch (Exception e) {
 			throw new ConfigPersisterException(e);
 		}
 	}
 
-	
 	public void save(File f) throws ConfigPersisterException {
 		try {
 			BufferedWriter w = new BufferedWriter(
 					new OutputStreamWriter(new FileOutputStream(f), "UTF-8"));
 			w.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-	    	_xstream.toXML(_config, w);
-	    	w.close();
-	    	setConfigPath(f);
+			_xstream.toXML(_config, w);
+			w.close();
+			setConfigPath(f);
 		} catch (Exception e) {
 			throw new ConfigPersisterException(e);
 		}
 	}
-	
+
 	/**
 	 * Converts 2.x config to current format.
 	 */
@@ -165,33 +163,33 @@ public class ConfigPersister {
 		boolean requires64Bit = configString.contains("<bundledJre64Bit>true</bundledJre64Bit>")
 				|| configString.contains("<runtimeBits>64</runtimeBits>");
 
-    	String updatedConfigString = configString
-    			.replaceAll("<headerType>0<", "<headerType>gui<")
-    			.replaceAll("<headerType>1<", "<headerType>console<")
-    			.replaceAll("jarArgs>", "cmdLine>")
-    			.replaceAll("<jarArgs[ ]*/>", "<cmdLine/>")
-    			.replaceAll("args>", "opt>")
-    			.replaceAll("<args[ ]*/>", "<opt/>")
-    			.replaceAll("<jdkPreference>jdkOnly</jdkPreference>", "<requiresJdk>true</requiresJdk>")
-    			.replaceAll("<initialHeapSize>0</initialHeapSize>", "")
-    			.replaceAll("<maxHeapSize>0</maxHeapSize>", "")
-    			.replaceAll("<customProcName>.*</customProcName>", "")
-    			.replaceAll("<bundledJre64Bit>.*</bundledJre64Bit>", "")
-    			.replaceAll("<bundledJreAsFallback>.*</bundledJreAsFallback>", "")
-    			.replaceAll("<jdkPreference>.*</jdkPreference>", "")
-    			.replaceAll("<runtimeBits>.*</runtimeBits>", "");
-    	
-    	Config config = (Config) _xstream.fromXML(updatedConfigString);
-    
-    	if (Validator.isEmpty(config.getJre().getPath())) {
-    		config.getJre().setPath(Jre.DEFAULT_PATH);
-    	}
-    	
-    	if (requires64Bit) {
-    		config.getJre().setRequires64Bit(true);
-    	}
-    	
-    	return config;
+		String updatedConfigString = configString
+				.replaceAll("<headerType>0<", "<headerType>gui<")
+				.replaceAll("<headerType>1<", "<headerType>console<")
+				.replaceAll("jarArgs>", "cmdLine>")
+				.replaceAll("<jarArgs[ ]*/>", "<cmdLine/>")
+				.replaceAll("args>", "opt>")
+				.replaceAll("<args[ ]*/>", "<opt/>")
+				.replaceAll("<jdkPreference>jdkOnly</jdkPreference>", "<requiresJdk>true</requiresJdk>")
+				.replaceAll("<initialHeapSize>0</initialHeapSize>", "")
+				.replaceAll("<maxHeapSize>0</maxHeapSize>", "")
+				.replaceAll("<customProcName>.*</customProcName>", "")
+				.replaceAll("<bundledJre64Bit>.*</bundledJre64Bit>", "")
+				.replaceAll("<bundledJreAsFallback>.*</bundledJreAsFallback>", "")
+				.replaceAll("<jdkPreference>.*</jdkPreference>", "")
+				.replaceAll("<runtimeBits>.*</runtimeBits>", "");
+
+		Config config = (Config) _xstream.fromXML(updatedConfigString);
+
+		if (Validator.isEmpty(config.getJre().getPath())) {
+			config.getJre().setPath(Jre.DEFAULT_PATH);
+		}
+
+		if (requires64Bit) {
+			config.getJre().setRequires64Bit(true);
+		}
+
+		return config;
 	}
 
 	private void setConfigPath(File configFile) {

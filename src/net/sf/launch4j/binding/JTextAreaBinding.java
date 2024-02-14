@@ -121,7 +121,7 @@ public class JTextAreaBinding implements Binding {
 	public void markInvalid() {
 		_textArea.setBackground(Binding.INVALID_COLOR);
 	}
-	
+
 	public void setEnabled(boolean enabled) {
 		_textArea.setEnabled(enabled);
 	}

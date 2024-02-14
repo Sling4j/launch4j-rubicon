@@ -85,15 +85,15 @@ public class ConfigFormImpl extends ConfigForm {
 	public void get(IValidatable bean) {
 		_bindings.get(bean);
 	}
-	
+
 	public boolean isModified() {
 		return _bindings.isModified();
 	}
-	
+
 	public JTextArea getLogTextArea() {
 		return _logTextArea;
 	}
-	
+
 	public Binding getBinding(String property) {
 		return _bindings.getBinding(property);
 	}

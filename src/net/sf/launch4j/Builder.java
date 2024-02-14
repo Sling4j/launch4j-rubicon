@@ -106,7 +106,7 @@ public class Builder {
 					.add("--nxcompat")
 					.add("--no-seh")
 					.add(c.isGuiApplication() ? "--subsystem windows" : "--subsystem console")
-					.add("-s")		// strip symbols
+					.add("-s") // strip symbols
 					.addFiles(c.getHeaderObjects())
 					.addAbsFile(ro)
 					.addFiles(c.getLibs())
@@ -120,7 +120,7 @@ public class Builder {
 				int len;
 				byte[] buffer = new byte[1024];
 				is = new FileInputStream(Util.getAbsoluteFile(
-						ConfigPersister.getInstance().getConfigPath(),	c.getJar()));
+						ConfigPersister.getInstance().getConfigPath(), c.getJar()));
 				os = new FileOutputStream(outfile, true);
 				while ((len = is.read(buffer)) > 0) {
 					os.write(buffer, 0, len);
@@ -134,7 +134,7 @@ public class Builder {
 			throw new BuilderException(e);
 		} catch (ExecException e) {
 			Util.delete(outfile);
-			String msg = e.getMessage(); 
+			String msg = e.getMessage();
 			if (msg != null && msg.indexOf("windres") != -1) {
 				if (e.getErrLine() != -1) {
 					log.error(Messages.getString("Builder.line.has.errors",

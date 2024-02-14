@@ -62,9 +62,9 @@ public class BasicFormImpl extends BasicForm {
 				.add("downloadUrl", _downloadUrlField)
 				.add("supportUrl", _supportUrlField)
 				.add("chdir", _chdirField, ".")
-				.add("priorityIndex", new JRadioButton[] { _normalPriorityRadio,
-															_idlePriorityRadio,
-															_highPriorityRadio })
+				.add("priorityIndex", new JRadioButton[]{_normalPriorityRadio,
+						_idlePriorityRadio,
+						_highPriorityRadio})
 				.add("stayAlive", _stayAliveCheck)
 				.add("restartOnCrash", _restartOnCrashCheck);
 
@@ -86,10 +86,10 @@ public class BasicFormImpl extends BasicForm {
 
 		public void stateChanged(ChangeEvent e) {
 			boolean dontWrap = _dontWrapJarCheck.isSelected();
-			if (dontWrap)  {
+			if (dontWrap) {
 				_jarLabel.setIcon(loadImage("images/asterix-o.gif"));
-			    _jarLabel.setText(Messages.getString("jarPath"));
-			    _jarField.setToolTipText(Messages.getString("jarPathTip"));
+				_jarLabel.setText(Messages.getString("jarPath"));
+				_jarField.setToolTipText(Messages.getString("jarPathTip"));
 			} else {
 				_jarLabel.setIcon(loadImage("images/asterix.gif"));
 				_jarLabel.setText(Messages.getString("jar"));

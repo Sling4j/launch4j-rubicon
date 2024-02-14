@@ -67,7 +67,7 @@ public class AntConfig extends Config {
 	public void addLib(StringWrapper lib) {
 		wrappedLibs.add(lib);
 	}
-	
+
 	public void addVar(StringWrapper var) {
 		wrappedVariables.add(var);
 	}
@@ -98,7 +98,7 @@ public class AntConfig extends Config {
 		checkNull(getVersionInfo(), "versionInfo");
 		setVersionInfo(versionInfo);
 	}
-	
+
 	public void addMessages(Msg messages) {
 		checkNull(getMessages(), "messages");
 		setMessages(messages);
@@ -124,8 +124,8 @@ public class AntConfig extends Config {
 		if (o != null) {
 			throw new BuildException(
 					Messages.getString("AntConfig.duplicate.element")
-					+ ": "
-					+ name);
+							+ ": "
+							+ name);
 		}
 	}
 }

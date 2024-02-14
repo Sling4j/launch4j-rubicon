@@ -44,7 +44,7 @@ public class ConfigPersisterException extends Exception {
 	public ConfigPersisterException(String msg, Throwable t) {
 		super(msg, t);
 	}
-	
+
 	public ConfigPersisterException(Throwable t) {
 		super(t);
 	}

@@ -59,7 +59,7 @@ public abstract class AbstractAcceptListener implements ActionListener {
 	protected String getText() {
 		return _field.getText();
 	}
-	
+
 	protected void clear() {
 		_field.setText("");
 		_field.requestFocusInWindow();

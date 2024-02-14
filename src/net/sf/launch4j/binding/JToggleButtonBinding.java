@@ -43,7 +43,7 @@ import javax.swing.JToggleButton;
 import org.apache.commons.beanutils.PropertyUtils;
 
 /**
- * Handles JToggleButton, JCheckBox 
+ * Handles JToggleButton, JCheckBox
  *
  * @author Copyright (C) 2005 Grzegorz Kowal
  */
@@ -92,7 +92,7 @@ public class JToggleButtonBinding implements Binding {
 			throw new BindingException(e);
 		}
 	}
-	
+
 	public void markValid() {
 		_button.setBackground(_validColor);
 		_button.requestFocusInWindow();
@@ -101,7 +101,7 @@ public class JToggleButtonBinding implements Binding {
 	public void markInvalid() {
 		_button.setBackground(Binding.INVALID_COLOR);
 	}
-	
+
 	public void setEnabled(boolean enabled) {
 		_button.setEnabled(enabled);
 	}

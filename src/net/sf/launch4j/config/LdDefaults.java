@@ -41,31 +41,31 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LdDefaults {
-	private static final List<String> GUI_OBJECTS = Arrays.asList(new String[] {
+	private static final List<String> GUI_OBJECTS = Arrays.asList(new String[]{
 			"w32api/crt2.o",
 			"head/guihead.o",
-			"head/head.o" });
+			"head/head.o"});
 
-	private static final List<String> CONSOLE_OBJECTS = Arrays.asList(new String[] {
+	private static final List<String> CONSOLE_OBJECTS = Arrays.asList(new String[]{
 			"w32api/crt2.o",
 			"head/consolehead.o",
-			"head/head.o" });
-	
-	private static final List<String> JNI_GUI_32_OBJECTS = Arrays.asList(new String[] {
+			"head/head.o"});
+
+	private static final List<String> JNI_GUI_32_OBJECTS = Arrays.asList(new String[]{
 			"w32api/crt2.o",
 			"head_jni_BETA/jniguihead.o",
 			"head_jni_BETA/head.o",
-			"head_jni_BETA/jnihead.o" });
+			"head_jni_BETA/jnihead.o"});
 
-	private static final List<String> JNI_CONSOLE_32_OBJECTS = Arrays.asList(new String[] {
+	private static final List<String> JNI_CONSOLE_32_OBJECTS = Arrays.asList(new String[]{
 			"w32api/crt2.o",
 			"head_jni_BETA/jniconsolehead.o",
 			"head_jni_BETA/head.o",
-			"head_jni_BETA/jnihead.o" });
+			"head_jni_BETA/jnihead.o"});
 
 	private static final List<List<String>> HEADER_OBJECTS;
 
-	private static final List<String> LIBS = Arrays.asList(new String[] {
+	private static final List<String> LIBS = Arrays.asList(new String[]{
 			"w32api/libmingw32.a",
 			"w32api/libmingwex.a",
 			"w32api/libgcc.a",
@@ -74,7 +74,7 @@ public class LdDefaults {
 			"w32api/libkernel32.a",
 			"w32api/libuser32.a",
 			"w32api/libadvapi32.a",
-			"w32api/libshell32.a" });
+			"w32api/libshell32.a"});
 
 	static {
 		HEADER_OBJECTS = new ArrayList<List<String>>();
@@ -91,7 +91,7 @@ public class LdDefaults {
 
 		return HEADER_OBJECTS.get(headerTypeIndex);
 	}
-	
+
 	public static List<String> getLibs(String headerType) {
 		if (Config.GUI_HEADER.equals(headerType)
 				|| Config.CONSOLE_HEADER.equals(headerType)) {
@@ -102,7 +102,7 @@ public class LdDefaults {
 				|| Config.JNI_CONSOLE_HEADER_32.equals(headerType)) {
 			return LIBS;
 		}
-		
+
 		throw new IllegalArgumentException("Unknown headerType: " + headerType);
 	}
 }

@@ -49,9 +49,9 @@ public class FileChooserFilter extends FileFilter {
 
 	public FileChooserFilter(String description, String extension) {
 		_description = description;
-		_extensions = new String[] {extension};
+		_extensions = new String[]{extension};
 	}
-	
+
 	public FileChooserFilter(String description, String[] extensions) {
 		_description = description;
 		_extensions = extensions;

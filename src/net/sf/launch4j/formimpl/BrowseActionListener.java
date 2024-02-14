@@ -68,9 +68,8 @@ public class BrowseActionListener implements ActionListener {
 		}
 		_fileChooser.setFileFilter(_filter);
 		_fileChooser.setSelectedFile(new File(""));
-		int result = _save
-				? _fileChooser.showSaveDialog(MainFrame.getInstance())
-				: _fileChooser.showOpenDialog(MainFrame.getInstance());
+		int result = _save ? _fileChooser.showSaveDialog(MainFrame.getInstance()) :
+				_fileChooser.showOpenDialog(MainFrame.getInstance());
 		if (result == JFileChooser.APPROVE_OPTION) {
 			_field.setText(_fileChooser.getSelectedFile().getPath());
 		}

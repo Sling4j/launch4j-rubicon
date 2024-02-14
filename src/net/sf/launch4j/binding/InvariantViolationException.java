@@ -52,11 +52,11 @@ public class InvariantViolationException extends RuntimeException {
 		super(msg);
 		_property = property;
 	}
-	
+
 	public String getProperty() {
 		return _property;
 	}
-	
+
 	public Binding getBinding() {
 		return _binding;
 	}

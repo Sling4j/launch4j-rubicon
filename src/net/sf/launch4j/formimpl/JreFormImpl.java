@@ -65,10 +65,10 @@ public class JreFormImpl extends JreForm {
 				.add("jre.maxHeapPercent", _maxHeapPercentField)
 				.add("jre.options", _jvmOptionsTextArea);
 
-		_varCombo.setModel(new DefaultComboBoxModel<String>(new String[] {
+		_varCombo.setModel(new DefaultComboBoxModel<String>(new String[]{
 				"EXEDIR", "EXEFILE", "PWD", "OLDPWD", "JREHOMEDIR",
 				"HKEY_CLASSES_ROOT", "HKEY_CURRENT_USER", "HKEY_LOCAL_MACHINE",
-				"HKEY_USERS", "HKEY_CURRENT_CONFIG" }));
+				"HKEY_USERS", "HKEY_CURRENT_CONFIG"}));
 
 		_varCombo.addActionListener(new VarComboActionListener());
 		_varCombo.setSelectedIndex(0);
@@ -155,7 +155,7 @@ public class JreFormImpl extends JreForm {
 		}
 
 		protected void add(String var, int pos) {
-			_jvmOptionsTextArea.insert("%" + var + "%\n", pos);	
+			_jvmOptionsTextArea.insert("%" + var + "%\n", pos);
 		}
 	}
 }

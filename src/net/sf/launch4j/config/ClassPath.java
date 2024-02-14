@@ -80,7 +80,7 @@ public class ClassPath implements IValidatable {
 		if (paths != null) {
 			for (int i = 0; i < paths.size(); i++) {
 				sb.append(paths.get(i));
-	
+
 				if (i < paths.size() - 1) {
 					sb.append(';');
 				}

@@ -45,7 +45,7 @@ import net.sf.launch4j.binding.Validator;
  * @author Copyright (C) 2005 Grzegorz Kowal
  */
 public class Splash implements IValidatable {
-	
+
 	// 1.x config properties_____________________________________________________________
 	public static final String SPLASH_FILE = "splash";
 	public static final String WAIT_FOR_TITLE = "waitForTitle";

@@ -106,7 +106,7 @@ public class JListBinding<T> implements Binding {
 			throw new BindingException(e);
 		}
 	}
-	
+
 	public void markValid() {
 		_list.setBackground(_validColor);
 		_list.requestFocusInWindow();
@@ -115,7 +115,7 @@ public class JListBinding<T> implements Binding {
 	public void markInvalid() {
 		_list.setBackground(Binding.INVALID_COLOR);
 	}
-	
+
 	public void setEnabled(boolean enabled) {
 		_list.setEnabled(enabled);
 	}

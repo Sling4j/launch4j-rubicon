@@ -58,7 +58,7 @@ public class OptJTextAreaBinding implements Binding, ActionListener {
 	private final JTextArea _textArea;
 	private final Color _validColor;
 
-	public OptJTextAreaBinding(String property, String stateProperty, 
+	public OptJTextAreaBinding(String property, String stateProperty,
 			JToggleButton button, JTextArea textArea) {
 		if (property == null || button == null || textArea == null) {
 			throw new NullPointerException();
@@ -135,7 +135,7 @@ public class OptJTextAreaBinding implements Binding, ActionListener {
 	public void markInvalid() {
 		_textArea.setBackground(Binding.INVALID_COLOR);
 	}
-	
+
 	public void setEnabled(boolean enabled) {
 		_textArea.setEnabled(enabled);
 	}

@@ -137,7 +137,7 @@ public class JRadioButtonBinding implements Binding {
 		throw new BindingException(
 				Messages.getString("JRadioButtonBinding.nothing.selected"));
 	}
-	
+
 	public void setEnabled(boolean enabled) {
 		for (int i = 0; i < _buttons.length; i++) {
 			_buttons[i].setEnabled(enabled);

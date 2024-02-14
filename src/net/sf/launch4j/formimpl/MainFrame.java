@@ -105,7 +105,7 @@ public class MainFrame extends JFrame {
 		setGlassPane(new GlassPane(this));
 		_fileChooser.setFileFilter(new FileChooserFilter(
 				Messages.getString("MainFrame.config.files"),
-				new String[] { ".xml" }));
+				new String[]{".xml"}));
 
 		_toolBar = new JToolBar();
 		_toolBar.setFloatable(false);
@@ -129,7 +129,7 @@ public class MainFrame extends JFrame {
 
 		_configForm = new ConfigFormImpl();
 		SwingLogUtils.setTextArea(_configForm.getLogTextArea());
-		
+
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(_toolBar, BorderLayout.NORTH);
 		getContentPane().add(_configForm, BorderLayout.CENTER);
@@ -142,9 +142,9 @@ public class MainFrame extends JFrame {
 				fr.width, fr.height);
 		setVisible(true);
 	}
-	
+
 	private ImageIcon getLocalIcon(String iconPath) {
-		return  new ImageIcon(MainFrame.class.getClassLoader().getResource(iconPath));
+		return new ImageIcon(MainFrame.class.getClassLoader().getResource(iconPath));
 	}
 
 	private JButton addButton(Icon icon, String tooltip, ActionListener l) {
@@ -154,23 +154,23 @@ public class MainFrame extends JFrame {
 		_toolBar.add(b);
 		return b;
 	}
-	
+
 	public void info(String text) {
-		JOptionPane.showMessageDialog(this, 
-									text,
-									Main.getName(),
-									JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(this,
+				text,
+				Main.getName(),
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	public void warn(String text) {
-		JOptionPane.showMessageDialog(this, 
-									text,
-									Main.getName(),
-									JOptionPane.WARNING_MESSAGE);
+		JOptionPane.showMessageDialog(this,
+				text,
+				Main.getName(),
+				JOptionPane.WARNING_MESSAGE);
 	}
 
 	public void warn(InvariantViolationException e) {
-		Binding b = e.getBinding(); 
+		Binding b = e.getBinding();
 		if (b != null) {
 			b.markInvalid();
 		}
@@ -219,8 +219,8 @@ public class MainFrame extends JFrame {
 	}
 
 	private void showConfigName(File config) {
-		setTitle(Main.getName() + " - " + (config != null ? config.getName()
-						: Messages.getString("MainFrame.untitled")));
+		setTitle(Main.getName() + " - "
+				+ (config != null ? config.getName() : Messages.getString("MainFrame.untitled")));
 	}
 
 	private void setRunEnabled(boolean enabled) {
@@ -262,10 +262,9 @@ public class MainFrame extends JFrame {
 	private class OpenActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			try {
-				if (canDiscardChanges() && _fileChooser.showOpenDialog(MainFrame.this)
-									== JOptionPane.YES_OPTION) {
+				if (canDiscardChanges() && _fileChooser.showOpenDialog(MainFrame.this) == JOptionPane.YES_OPTION) {
 					final File f = _fileChooser.getSelectedFile();
-					ConfigPersister.getInstance().load(f);	
+					ConfigPersister.getInstance().load(f);
 					_saved = true;
 					_configForm.put(ConfigPersister.getInstance().getConfig());
 					showConfigName(f);
@@ -278,13 +277,13 @@ public class MainFrame extends JFrame {
 			}
 		}
 	}
-	
+
 	private class SaveActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			save();
 		}
 	}
-	
+
 	private class BuildActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			try {
@@ -292,14 +291,15 @@ public class MainFrame extends JFrame {
 						&& !save()) {
 					return;
 				}
-				//log.clear();
+				// log.clear();
 				ConfigPersister.getInstance().getConfig().checkInvariants();
 				Builder b = new Builder(null);
 				_outfile = b.build();
 				setRunEnabled(ConfigPersister.getInstance().getConfig().isGuiApplication()
 						// TODO fix console app test
 						&& (Util.WINDOWS_OS || !ConfigPersister.getInstance()
-												.getConfig().isDontWrapJar()));
+								.getConfig()
+								.isDontWrapJar()));
 			} catch (InvariantViolationException ex) {
 				setRunEnabled(false);
 				ex.setBinding(_configForm.getBinding(ex.getProperty()));
@@ -310,24 +310,23 @@ public class MainFrame extends JFrame {
 			}
 		}
 	}
-	
+
 	private class RunActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			try {
 				getGlassPane().setVisible(true);
 				new SwingWorker<Boolean, Boolean>() {
 					@Override
-					protected Boolean doInBackground() throws ExecException
-					{
-						//log.clear();
+					protected Boolean doInBackground() throws ExecException {
+						// log.clear();
 						String path = _outfile.getPath();
 						if (Util.WINDOWS_OS) {
 							log.info(Messages.getString("MainFrame.executing") + path);
-							Util.exec(new String[] { path, "--l4j-debug" }, null);
+							Util.exec(new String[]{path, "--l4j-debug"}, null);
 						} else {
 							log.info(Messages.getString("MainFrame.jar.integrity.test")
 									+ path);
-							Util.exec(new String[] { "java", "-jar", path }, null);
+							Util.exec(new String[]{"java", "-jar", path}, null);
 						}
 						return true;
 					}
