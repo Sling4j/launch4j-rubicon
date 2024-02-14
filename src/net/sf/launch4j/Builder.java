@@ -69,6 +69,18 @@ public class Builder {
 	 */
 	public File build() throws BuilderException {
 		final Config c = ConfigPersister.getInstance().getConfig();
+		final BuildContext context = BuildContext.get(c);
+
+		String varCustomExe = context.getVariable("launch4j.customExe", true, null);
+		if (varCustomExe != null) {
+			log.info("launch4j.customExe=" + varCustomExe);
+		}
+
+		boolean varKeepTempFiles = Boolean.valueOf(context.getVariable("launch4j.keepTempFiles", true, "false"));
+		if (varKeepTempFiles) {
+			log.info("launch4j.keepTempFiles=true");
+		}
+
 		try {
 			c.validate();
 		} catch (InvariantViolationException e) {
@@ -106,7 +118,8 @@ public class Builder {
 					.add("--nxcompat")
 					.add("--no-seh")
 					.add(c.isGuiApplication() ? "--subsystem windows" : "--subsystem console")
-					.add("-s") // strip symbols
+					.add("-s") // strip
+					// symbols
 					.addFiles(c.getHeaderObjects())
 					.addAbsFile(ro)
 					.addFiles(c.getLibs())
@@ -118,9 +131,9 @@ public class Builder {
 			if (!c.isDontWrapJar()) {
 				log.info(Messages.getString("Builder.wrapping"));
 				int len;
-				byte[] buffer = new byte[1024];
-				is = new FileInputStream(Util.getAbsoluteFile(
-						ConfigPersister.getInstance().getConfigPath(), c.getJar()));
+				byte[] buffer = new byte[16 * 1024];
+				is = new FileInputStream(
+						Util.getAbsoluteFile(ConfigPersister.getInstance().getConfigPath(), c.getJar()));
 				os = new FileOutputStream(outfile, true);
 				while ((len = is.read(buffer)) > 0) {
 					os.write(buffer, 0, len);
@@ -137,8 +150,7 @@ public class Builder {
 			String msg = e.getMessage();
 			if (msg != null && msg.indexOf("windres") != -1) {
 				if (e.getErrLine() != -1) {
-					log.error(Messages.getString("Builder.line.has.errors",
-							String.valueOf(e.getErrLine())));
+					log.error(Messages.getString("Builder.line.has.errors", String.valueOf(e.getErrLine())));
 					log.error(rcb.getLine(e.getErrLine()));
 				} else {
 					log.info(Messages.getString("Builder.generated.resource.file"));
@@ -149,8 +161,10 @@ public class Builder {
 		} finally {
 			Util.close(is);
 			Util.close(os);
-			Util.delete(rc);
-			Util.delete(ro);
+			if (!varKeepTempFiles) {
+				Util.delete(rc);
+				Util.delete(ro);
+			}
 		}
 	}
 }

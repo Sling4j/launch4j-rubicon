@@ -39,7 +39,9 @@ package net.sf.launch4j.config;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class LdDefaults {
 	private static final List<String> GUI_OBJECTS = Arrays.asList(new String[]{
 			"w32api/crt2.o",
@@ -85,8 +87,13 @@ public class LdDefaults {
 	}
 
 	public static List<String> getHeaderObjects(int headerTypeIndex) {
-		if (headerTypeIndex < 0 || headerTypeIndex > 3) {
+
+		if (headerTypeIndex < 0 || headerTypeIndex >= Config.HEADER_TYPES.length) {
 			throw new IllegalArgumentException("headerTypeIndex is out of range: " + headerTypeIndex);
+		}
+
+		if (headerTypeIndex >= 4) {
+			return new ArrayList<String>();
 		}
 
 		return HEADER_OBJECTS.get(headerTypeIndex);
@@ -103,6 +110,9 @@ public class LdDefaults {
 			return LIBS;
 		}
 
-		throw new IllegalArgumentException("Unknown headerType: " + headerType);
+		log.warn("Unknown headerType: " + headerType);
+		return new ArrayList<>();
+
+		// throw new IllegalArgumentException("Unknown headerType: " + headerType);
 	}
 }

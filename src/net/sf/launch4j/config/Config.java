@@ -39,6 +39,7 @@ package net.sf.launch4j.config;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
 import net.sf.launch4j.binding.IValidatable;
 import net.sf.launch4j.binding.Validator;
@@ -46,6 +47,7 @@ import net.sf.launch4j.binding.Validator;
 /**
  * @author Copyright (C) 2005 Grzegorz Kowal
  */
+@Slf4j
 public class Config implements IValidatable {
 
 	// 1.x config properties_____________________________________________________________
@@ -63,11 +65,13 @@ public class Config implements IValidatable {
 	public static final String CONSOLE_HEADER = "console";
 	public static final String JNI_GUI_HEADER_32 = "jniGui32";
 	public static final String JNI_CONSOLE_HEADER_32 = "jniConsole32";
+	public static final String CUSTOM_EXE = "customExe";
 
-	private static final String[] HEADER_TYPES = new String[]{GUI_HEADER,
+	public static final String[] HEADER_TYPES = new String[]{GUI_HEADER,
 			CONSOLE_HEADER,
 			JNI_GUI_HEADER_32,
-			JNI_CONSOLE_HEADER_32};
+			JNI_CONSOLE_HEADER_32,
+			CUSTOM_EXE};
 
 	private static final String[] PRIORITY_CLASS_NAMES = new String[]{"normal",
 			"idle",
