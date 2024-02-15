@@ -86,7 +86,7 @@ public class Builder {
 			}
 
 			rc = rcb.build(c);
-			ro = Util.createTempFile("o");
+			ro = Util.createTempFile(".o");
 			outfile = ConfigPersister.getInstance().getOutputFile();
 
 			Cmd resCmd = new Cmd(_basedir);

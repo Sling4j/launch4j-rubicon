@@ -164,7 +164,7 @@ public class RcBuilder {
 			addWindowsPath(JAR, c.getJar().getPath());
 		}
 
-		File file = Util.createTempFile("rc");
+		File file = Util.createTempFile(".rc");
 
 		if ("MS932".equals(System.getProperty("file.encoding"))) {
 			writeKanjiResourceFile(file);
@@ -247,7 +247,7 @@ public class RcBuilder {
 		addVerBlockValue("ProductVersion", v.getTxtProductVersion());
 		_sb.append("  }\n }\nBLOCK \"VarFileInfo\"\n{\nVALUE \"Translation\", ");
 		_sb.append(String.format("0x%04X, 0x%04X", v.getLanguage().getId(), CharsetID.MULTILINGUAL.getId()));
-		_sb.append("\n}\n}");
+		_sb.append("\n}\n}\n");
 	}
 
 	private void addJre(Jre jre) {
@@ -367,7 +367,7 @@ public class RcBuilder {
 		}
 
 		_sb.append(id);
-		_sb.append(" ICON DISCARDABLE \"");
+		_sb.append(" ICON \"");
 		_sb.append(getPath(Util.getAbsoluteFile(
 				ConfigPersister.getInstance().getConfigPath(), icon)));
 		_sb.append("\"\n");
