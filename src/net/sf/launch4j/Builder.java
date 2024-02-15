@@ -97,36 +97,67 @@ public class Builder {
 				log.warn("WARNING: Some features are not implemented in JNI headers, see documentation.");
 			}
 
-			rc = rcb.build(c);
-			ro = Util.createTempFile(".o");
-			outfile = ConfigPersister.getInstance().getOutputFile();
+			if (c.getHeaderType().equals("customExe")) {
+				log.info("Preparing custom header");
 
-			Cmd resCmd = new Cmd(_basedir);
-			resCmd.addExe("windres")
-					.add(Util.WINDOWS_OS ? "--preprocessor=type" : "--preprocessor=cat")
-					.add("-J rc -O coff -F pe-i386")
-					.addAbsFile(rc)
-					.addAbsFile(ro);
-			log.info(Messages.getString("Builder.compiling.resources"));
-			resCmd.exec(null);
+				rc = rcb.build(c);
+				ro = Util.createTempFile(".res");
+				outfile = ConfigPersister.getInstance().getOutputFile();
 
-			Cmd ldCmd = new Cmd(_basedir);
-			ldCmd.addExe("ld")
-					.add("-mi386pe")
-					.add("--oformat pei-i386")
-					.add("--dynamicbase")
-					.add("--nxcompat")
-					.add("--no-seh")
-					.add(c.isGuiApplication() ? "--subsystem windows" : "--subsystem console")
-					.add("-s") // strip
-					// symbols
-					.addFiles(c.getHeaderObjects())
-					.addAbsFile(ro)
-					.addFiles(c.getLibs())
-					.add("-o")
-					.addAbsFile(outfile);
-			log.info(Messages.getString("Builder.linking"));
-			ldCmd.exec(null);
+				Cmd resCmd = new Cmd(_basedir);
+				resCmd.addExe("windres")
+						.add(Util.WINDOWS_OS ? "--preprocessor=type" : "--preprocessor=cat")
+						.add("-J rc -O res")
+						.addAbsFile(rc)
+						.addAbsFile(ro);
+				log.info(Messages.getString("Builder.compiling.resources"));
+				resCmd.exec(null);
+
+				Cmd rhCmd2 = new Cmd(_basedir);
+				rhCmd2.addAbsFile(new File("C:\\Program Files (x86)\\Resource Hacker\\ResourceHacker.exe"));
+				rhCmd2.add("-open");
+				rhCmd2.addAbsFile(new File(varCustomExe));
+
+				rhCmd2.add("-save");
+				rhCmd2.addAbsFile(outfile);
+				rhCmd2.add("-action");
+				rhCmd2.add("addoverwrite");
+				rhCmd2.add("-resource");
+				rhCmd2.addAbsFile(ro);
+				rhCmd2.exec(null);
+			} else {
+
+				rc = rcb.build(c);
+				ro = Util.createTempFile(".o");
+				outfile = ConfigPersister.getInstance().getOutputFile();
+
+				Cmd resCmd = new Cmd(_basedir);
+				resCmd.addExe("windres")
+						.add(Util.WINDOWS_OS ? "--preprocessor=type" : "--preprocessor=cat")
+						.add("-J rc -O coff -F pe-i386")
+						.addAbsFile(rc)
+						.addAbsFile(ro);
+				log.info(Messages.getString("Builder.compiling.resources"));
+				resCmd.exec(null);
+
+				Cmd ldCmd = new Cmd(_basedir);
+				ldCmd.addExe("ld")
+						.add("-mi386pe")
+						.add("--oformat pei-i386")
+						.add("--dynamicbase")
+						.add("--nxcompat")
+						.add("--no-seh")
+						.add(c.isGuiApplication() ? "--subsystem windows" : "--subsystem console")
+						.add("-s") // strip
+						// symbols
+						.addFiles(c.getHeaderObjects())
+						.addAbsFile(ro)
+						.addFiles(c.getLibs())
+						.add("-o")
+						.addAbsFile(outfile);
+				log.info(Messages.getString("Builder.linking"));
+				ldCmd.exec(null);
+			}
 
 			if (!c.isDontWrapJar()) {
 				log.info(Messages.getString("Builder.wrapping"));
