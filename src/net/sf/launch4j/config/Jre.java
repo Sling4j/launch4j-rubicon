@@ -67,9 +67,11 @@ public class Jre implements IValidatable {
 				Messages.getString("Jre.max.version"));
 		Validator.checkString(path, Validator.MAX_PATH, "jre.path", Messages.getString("Jre.path"));
 		if (!Validator.isEmpty(maxVersion)) {
-			Validator.checkFalse(Validator.isEmpty(minVersion), "jre.minVersion",
-					Messages.getString("Jre.specify.min.version"));
-			Validator.checkTrue(JreVersion.parseString(minVersion).compareTo(JreVersion.parseString(maxVersion)) < 0,
+			// there's no reason to require min when max is specified
+			// Validator.checkFalse(Validator.isEmpty(minVersion), "jre.minVersion",
+			// Messages.getString("Jre.specify.min.version"));
+			// there's no reason to disallow min = max, changing < to <=
+			Validator.checkTrue(JreVersion.parseString(minVersion).compareTo(JreVersion.parseString(maxVersion)) <= 0,
 					"jre.maxVersion", Messages.getString("Jre.max.greater.than.min"));
 		}
 		Validator.checkTrue(initialHeapSize == null || maxHeapSize != null, "jre.maxHeapSize",
