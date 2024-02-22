@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.sf.launch4j</groupId>
     <artifactId>launch4j-rubicon</artifactId>
-    <version>3.50</version>
+    <version>3.50.13-SNAPSHOT</version>
     <name>Launch4j-rubicon</name>
     <description>Cross-platform Java executable wrapper for creating lightweight Windows native EXEs. Provides advanced JRE search, application startup configuration and better user experience.</description>
     <url>http://sourceforge.net/projects/launch4j/</url>
@@ -76,8 +76,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <versionNumber>3.50.0.0</versionNumber>
-        <version>3.50</version>
+        <versionNumber>3.50.6.0</versionNumber>
+        <version>3.50.6</version>
     </properties>
 
     <dependencies>
